@@ -41,7 +41,7 @@ dist/%.tex: src/%.lhs
 	lhs2TeX -o $@ $<
 
 ## Builds the target.
-default : $(BUILD_DEPENDS)
+default : $(BUILD_DEPENDS) tex/latex/uustthesis.cls
 	@mkdir -p dist
 	export TEXMFHOME=".:$(TEXMFHOME)" && \
 	$(LATEX) $(MAIN_FILE)

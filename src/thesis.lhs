@@ -1,6 +1,7 @@
-\documentclass{uustthesis}
+\documentclass[a4paper]{uustthesis}
 
 \title{Testing}
+\author{Tester}
 
 %include lhs2TeX.fmt
 \begin{document}
@@ -15,3 +16,5 @@
 \bibliography{references}
 
 \end{document}
+
+
