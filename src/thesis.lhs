@@ -2,10 +2,12 @@
 
 \title{Testing}
 \author{Tester}
+\supervisor{Supervisor 1 \\ Supervisor 2}
 
 %include lhs2TeX.fmt
 \begin{document}
   \maketitle
+  \tableofcontents
 
 \chapter{Introduction}
 %include src/chap01.lhs

@@ -38,6 +38,7 @@ MAIN_FILE=dist/$(TGT).tex
 
 ## Build all necessary tex files with lhs2TeX
 dist/%.tex: src/%.lhs
+	@mkdir -p dist
 	lhs2TeX -o $@ $<
 
 ## Builds the target.
