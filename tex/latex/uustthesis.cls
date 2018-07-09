@@ -1,10 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{uustthesis}[2018/07/04 Utrecht University Software Technology Thesis Template]
+%% We'll build on top of the 'book' class.
+\LoadClass[oneside]{book}
 
 %% Basic Commands
-
-%% We'll build on top of the 'report' class.
-\LoadClass{report}
 
 %% Necessary Packags
 \RequirePackage{geometry}
@@ -14,17 +13,20 @@
 \RequirePackage{ccaption}
 \RequirePackage{tocloft}
 \RequirePackage{graphicx}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{mathspec}
 
 %% Declaring our Options
 
 %% Paper sizes are handled by the geometry package.
-\DeclareOption{a4paper}{\geometry{a4paper}}
-\DeclareOption{a5paper}{\geometry{a5paper}}
+\DeclareOption{a4paper}{\PassOptionsToClass{a4paper}{book}\geometry{a4paper}}
+\DeclareOption{a5paper}{\passOptionsToClass{a5paper}{book}\geometry{a5paper}}
 
 %% Here we can pass undeclared options to some class
 %% or package
 \DeclareOption*{%
-  \PassOptionsToClass{\CurrentOption}{report}%
+  \PassOptionsToClass{\CurrentOption}{book}%
 }
 \ProcessOptions\relax 
 %% This finishes the 'options' section
@@ -36,6 +38,46 @@
 %%%%%%%%%%%%%%%%%%
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for horizontal lines, change thickness here
+
+%% Took from Dissertate @ https://github.com/suchow/Dissertate commit 58b4f
+\newcommand{\dnormalspacing}{1.2}
+\newcommand{\dcompressedspacing}{1.0}
+
+% Block quote with compressed spacing
+\let\oldquote\quote
+\let\endoldquote\endquote
+\renewenvironment{quote}
+    {\begin{spacing}{\dcompressedspacing}\oldquote}
+    {\endoldquote\end{spacing}}
+
+% Itemize with compressed spacing
+\let\olditemize\itemize
+\let\endolditemize\enditemize
+\renewenvironment{itemize}
+    {\begin{spacing}{\dcompressedspacing}\olditemize}
+    {\endolditemize\end{spacing}}
+
+% Enumerate with compressed spacing
+\let\oldenumerate\enumerate
+\let\endoldenumerate\endenumerate
+\renewenvironment{enumerate}
+    {\begin{spacing}{\dcompressedspacing}\oldenumerate}
+    {\endoldenumerate\end{spacing}}
+
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+%% Text Layout %%
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+
+
+\setmainfont[ Path           = ./tex/latex/fonts/
+            , BoldFont       = texgyrepagella-bold.otf
+            , ItalicFont     = texgyrepagella-italic.otf
+            , BoldItalicFont = texgyrepagella-bolditalic.otf]%
+            {texgyrepagella-regular.otf}
+%\setmathsfont(Digits,Latin,Greek){texgyrepagella-math.otf}
+\setmathsfont(Digits,Latin,Greek){XITS Math}
 
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
@@ -92,6 +134,7 @@
   \vfill\newpage
 \end{center}
 }
+
 %% End of title page
 
 %%%%%%%%%%%%%%%%%%

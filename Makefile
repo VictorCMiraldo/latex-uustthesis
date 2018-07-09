@@ -1,7 +1,7 @@
 ## The LaTeX command to use; it is a good idea to make
 ## sure you can specify the output-directory to be 'dist';
 ## it helps keeping the whole development organized.
-LATEX=pdflatex -shell-escape -output-directory=dist
+LATEX=xelatex -shell-escape -output-directory=dist
 
 ## The target name and full name (with extension)
 TGT=thesis
