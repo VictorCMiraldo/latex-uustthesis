@@ -9,13 +9,10 @@
 \RequirePackage{geometry}
 \RequirePackage{fancyhdr}
 \RequirePackage{xcolor}
-\RequirePackage{titlesec}
 \RequirePackage{ccaption}
-\RequirePackage{tocloft}
 \RequirePackage{graphicx}
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
-% \RequirePackage{mathspec}
 \RequirePackage{unicode-math}
 
 %% Declaring our Options
@@ -71,7 +68,30 @@
 %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%
 
+
+% Headings and headers.
+\RequirePackage{fancyhdr}
+\RequirePackage[md, sc]{titlesec}
+\setlength{\headheight}{15pt}
+\pagestyle{plain}
+\RequirePackage{titling}
+
+% Front matter.
+\setcounter{tocdepth}{1}
+\usepackage[titles]{tocloft}
+\usepackage[titletoc]{appendix}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftchapfont}{\normalsize \scshape}
+\renewcommand\listfigurename{Listing of figures}
+\renewcommand\listtablename{Listing of tables}
+
+\RequirePackage[palatino]{quotchap}
+\renewcommand*{\chapterheadstartvskip}{\vspace*{-0.5\baselineskip}}
+\renewcommand*{\chapterheadendvskip}{\vspace{1.3\baselineskip}}
+
+
 %% Font Confiruation using unicode-math package
+%% https://tex.stackexchange.com/questions/30049/how-to-select-math-font-in-document#30066
 %%
 %% WARNING: Fonts must be installed locally; to do so,
 %%          run 'make fonts'
@@ -94,6 +114,8 @@
 % \setmathfont{TeX Gyre Pagella Math}[version=pagella]
 % \setmainfont{TeX Gyre Pagella}
 % \mathversion{pagella}
+
+
 
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
@@ -159,9 +181,10 @@
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
 
-\titleformat{\chapter}[block]%
-{\bfseries\Large\filleft}%
-{\Huge\color{gray}\thechapter}%
-{1em}
-{\hfill\Huge\scshape}%
-[\HRule]
+% 
+% \titleformat{\chapter}[block]%
+% {\bfseries\Large\filleft}%
+% {\Huge\color{gray}\thechapter}%
+% {1em}
+% {\hfill\Huge\scshape}%
+% [\HRule]
