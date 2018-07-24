@@ -59,3 +59,10 @@ bib: references.bib dist/$(TGT).aux
 ## Standard cleanup
 clean:
 	cd dist && rm -rf * && cd ..
+
+## Installs the math fonts locally
+## Unfortunately, this is necessary for
+## loading mathfonts, even with XeTeX.
+fonts:
+	@mkdir -p ~/.fonts
+	cp tex/latex/fonts/* ~/.fonts/

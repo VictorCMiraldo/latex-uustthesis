@@ -15,7 +15,8 @@
 \RequirePackage{graphicx}
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
-\RequirePackage{mathspec}
+% \RequirePackage{mathspec}
+\RequirePackage{unicode-math}
 
 %% Declaring our Options
 
@@ -70,14 +71,29 @@
 %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%
 
+%% Font Confiruation using unicode-math package
+%%
+%% WARNING: Fonts must be installed locally; to do so,
+%%          run 'make fonts'
+\defaultfontfeatures{Scale=MatchLowercase}
 
-\setmainfont[ Path           = ./tex/latex/fonts/
-            , BoldFont       = texgyrepagella-bold.otf
-            , ItalicFont     = texgyrepagella-italic.otf
-            , BoldItalicFont = texgyrepagella-bolditalic.otf]%
-            {texgyrepagella-regular.otf}
-%\setmathsfont(Digits,Latin,Greek){texgyrepagella-math.otf}
-\setmathsfont(Digits,Latin,Greek){XITS Math}
+%% Choosing STIX Two as our font
+%%
+%% This also loads some fancier stylistic sets for \mathcal and stuff.
+\setmathfont{STIX Two Math}[StylisticSet={1,2,8}, version=stix2_128]
+% \setmathfont{STIX Two Math}[version=stix2_128]
+\setmainfont{STIX Two Text}
+\mathversion{stix2_128}
+
+%% Choosing XITS as our font
+% \setmathfont{XITS Math}[version=xits]
+% \setmainfont{XITS}
+% \mathversion{xits}
+
+%% Choosing TeX Gyre Pagella as our font
+% \setmathfont{TeX Gyre Pagella Math}[version=pagella]
+% \setmainfont{TeX Gyre Pagella}
+% \mathversion{pagella}
 
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
