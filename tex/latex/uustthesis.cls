@@ -68,6 +68,12 @@
 %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%
 
+%% Margins and Geomtry config
+\geometry{lmargin=.12\textwidth}
+\geometry{rmargin=.12\textwidth}
+\geometry{tmargin=.15\textheight}
+\geometry{twoside,bindingoffset=1cm}
+\savegeometry{uustthesis-geometry}
 
 % Headings and headers.
 \RequirePackage{fancyhdr}
@@ -107,15 +113,19 @@
 % \mathversion{xits}
 
 %% Choosing TeX Gyre Pagella as our font
-\setmathfont{TeX Gyre Pagella Math}[version=pagella]
+% \setmathfont{TeX Gyre Pagella Math}[version=pagella]
 % \setmainfont{TeX Gyre Pagella}
 % \mathversion{pagella}
 
 %% Fancy Chapter Headers
 \RequirePackage{quotchap}
-\qsetcnfont{stix2_128}
-\renewcommand*{\chapterheadstartvskip}{\vspace*{-0.5\baselineskip}}
-\renewcommand*{\chapterheadendvskip}{\vspace{1.3\baselineskip}}
+%% Hacking quotchap
+\renewcommand*{\chapnumfont}{%
+  \fontsize{100}{130}\selectfont% Default: 100/130
+  \color{chaptergrey}%
+}
+\renewcommand*{\chapterheadstartvskip}{\vspace*{-4\baselineskip}}
+\renewcommand*{\chapterheadendvskip}{\vspace{0.8\baselineskip}}
 
 
 
@@ -130,6 +140,9 @@
 \newcommand{\supervisor}[1]{\gdef\@supervisor{#1}}
 
 \renewcommand{\maketitle}{
+%%%%%%%%%%%%%
+%% Custom title page geometry
+\newgeometry{left=3cm,right=3cm}
 \thispagestyle{empty}
 \begin{center}
 %%%%%%%%%%%%%
@@ -173,6 +186,9 @@
   {\large\@date} 
   \vfill\newpage
 \end{center}
+%%%%%%%%%%%%
+%% Restore our previous geometry
+\restoregeometry
 }
 
 %% End of title page
