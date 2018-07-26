@@ -85,10 +85,6 @@
 \renewcommand\listfigurename{Listing of figures}
 \renewcommand\listtablename{Listing of tables}
 
-\RequirePackage[palatino]{quotchap}
-\renewcommand*{\chapterheadstartvskip}{\vspace*{-0.5\baselineskip}}
-\renewcommand*{\chapterheadendvskip}{\vspace{1.3\baselineskip}}
-
 
 %% Font Confiruation using unicode-math package
 %% https://tex.stackexchange.com/questions/30049/how-to-select-math-font-in-document#30066
@@ -111,9 +107,15 @@
 % \mathversion{xits}
 
 %% Choosing TeX Gyre Pagella as our font
-% \setmathfont{TeX Gyre Pagella Math}[version=pagella]
+\setmathfont{TeX Gyre Pagella Math}[version=pagella]
 % \setmainfont{TeX Gyre Pagella}
 % \mathversion{pagella}
+
+%% Fancy Chapter Headers
+\RequirePackage{quotchap}
+\qsetcnfont{stix2_128}
+\renewcommand*{\chapterheadstartvskip}{\vspace*{-0.5\baselineskip}}
+\renewcommand*{\chapterheadendvskip}{\vspace{1.3\baselineskip}}
 
 
 

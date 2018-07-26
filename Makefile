@@ -15,6 +15,10 @@ TGT_FULL=$(TGT).lhs
 ## directive internally.
 BUILD_DEPENDS_LHS=$(TGT_FULL)
 
+## Now, this very file might depend on other lhs files too,
+## which should NOT go through lhs2TeX separatly
+LHS_DEPENDENCIES=chap01.lhs
+
 ## Process the above list into a desired format.
 ## Example: if $(BUILD_DEPENDS_LHS) == "a.lhs b.lhs"
 ## then $(BUILD_DEPENDS_LHS_TEX) == "a.tex b.tex"
@@ -37,7 +41,7 @@ MAIN_FILE=dist/$(TGT).tex
 ## MAIN_FILE=src/$(TGT).tex
 
 ## Build all necessary tex files with lhs2TeX
-dist/%.tex: src/%.lhs
+dist/%.tex: src/%.lhs $(addprefix src/,$(LHS_DEPENDENCIES))
 	@mkdir -p dist
 	lhs2TeX -o $@ $<
 
