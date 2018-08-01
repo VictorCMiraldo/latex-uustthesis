@@ -1,9 +1,88 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                            %%
+%% Class ``UU Software Tech. Thesis Template''                                %%
+%%                                                                            %%
+%% A PhD thesis LaTeX template for Cambridge University Engineering Department%%
+%%                                                                            %%
+%% Version: v0.0.1                                                            %%
+%% Authors: Victor Cacciari Miraldo                                           %%
+%% License: MIT License (c) 2018 Victor Cacciari Miraldo                      %%
+%% GitHub Repo: https://github.com/VictorCMiraldo/latex-uustthesis            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\fileversion{0.0.1}
+\newcommand\filedate{2018/08/01}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{uustthesis}[2018/07/04 Utrecht University Software Technology Thesis Template]
-%% We'll build on top of the 'book' class.
-\LoadClass[oneside]{book}
+\ProvidesClass{uustthesis}[\filedate\space Utrecht University Software Technology Thesis Template (v\fileversion)]
+\typeout{https://github.com/VictorCMiraldo/latex-uustthesis}
 
-%% Basic Commands
+%% This class file was heavily inspired by:
+%%   - https://github.com/suchow/Dissertate commit 58b4f
+%%   - https://github.com/kks32/phd-thesis-template/blob/master/Classes/PhDThesisPSnPDF.cls
+%%
+
+%%%%%%%%%%%%%%%%
+%% Font setup %%
+%%%%%%%%%%%%%%%%
+
+% Font is not set
+\newif\ifsetFont\setFontfalse
+
+%% Using xits2 with math support
+%% 
+\newif\ifUUCS@stixtwo\UUCS@stixtwofalse
+\DeclareOption{stixtwo}{
+  \ifsetFont
+    \ClassWarning{uustthesis}{Font already set; check class file options!}
+  \else
+    \UUCS@stixtwotrue
+    \setFonttrue
+  \fi
+}
+
+% Font Size
+\DeclareOption{10pt}{
+  \ClassWarning{uustthesis}{A fontsize of 10pt is very small. Consider 11pt or 12pt.}
+  \PassOptionsToClass{10pt}{book}%
+}
+\DeclareOption{11pt}{\PassOptionsToClass{11pt}{book}}%
+\DeclareOption{12pt}{\PassOptionsToClass{12pt}{book}}%
+
+% Page Size
+\newcommand\PHD@papersize{a4paper} % Set Default as a4paper
+\DeclareOption{a4paper}{\renewcommand\PHD@papersize{a4paper}}
+\DeclareOption{a5paper}{\renewcommand\PHD@papersize{a5paper}}
+\DeclareOption{letterpaper}{
+  \ClassWarning{uustthesis}{The University of Utrecht
+    thesis guidelines recommend using A4 or A5paper}
+  \renewcommand\PHD@papersize{letterpaper}
+}
+
+\PassOptionsToClass{\PHD@papersize}{book}%
+
+% Column layout
+\DeclareOption{oneside}{\PassOptionsToClass{\CurrentOption}{book}}%
+\DeclareOption{twoside}{\PassOptionsToClass{\CurrentOption}{book}}%
+
+%% Paper sizes are handled by the geometry package.
+% \DeclareOption{a4paper}{\PassOptionsToClass{a4paper}{book}\geometry{a4paper}}
+% \DeclareOption{a5paper}{\passOptionsToClass{a5paper}{book}\geometry{a5paper}}
+
+%% Here we can pass undeclared options to some class
+%% or package
+\DeclareOption*{%
+  \ClassWarning{uustthesis}{Unknown option '\CurrentOption'.
+I'll pass it to 'book' just in case.}
+  \PassOptionsToClass{\CurrentOption}{book}%
+}
+\ProcessOptions\relax 
+%% This finishes the 'options' section
+
+%% We'll build on top of the 'book' class.
+\LoadClass{book}
+
+%%%%%%%%%%%%%%%%
+%% Font setup %%
+%%%%%%%%%%%%%%%%
 
 %% Necessary Packags
 \RequirePackage{geometry}
@@ -15,19 +94,72 @@
 \RequirePackage{amssymb}
 \RequirePackage{unicode-math}
 
-%% Declaring our Options
+%% Font Confiruation using unicode-math package
+%% https://tex.stackexchange.com/questions/30049/how-to-select-math-font-in-document#30066
+%%
+%% WARNING: Fonts must be installed locally; to do so,
+%%          run 'make fonts'
+\defaultfontfeatures{Scale=MatchLowercase}
 
-%% Paper sizes are handled by the geometry package.
-\DeclareOption{a4paper}{\PassOptionsToClass{a4paper}{book}\geometry{a4paper}}
-\DeclareOption{a5paper}{\passOptionsToClass{a5paper}{book}\geometry{a5paper}}
+\ifUUCS@stixtwo
+\setmathfont{STIX Two Math}[StylisticSet={1,2,8}, version=stix2_128]
+\setmainfont{STIX Two Math}
+\mathversion{stix2_128}
+\fi 
 
-%% Here we can pass undeclared options to some class
-%% or package
-\DeclareOption*{%
-  \PassOptionsToClass{\CurrentOption}{book}%
+\ifsetFont
+\else
+\ClassWarning{uustthesis}{Font not set, defualting to Latin Modern}
+\setmathfont{Latin Modern Math}[version=lm]
+\setmainfont{Latin Modern Math}
+\mathversion{lm}
+\fi
+
+%% Choosing STIX Two as our font
+%%
+%% This also loads some fancier stylistic sets for \mathcal and stuff.
+%\setmathfont{STIX Two Math}[StylisticSet={1,2,8}, version=stix2_128]
+% \setmathfont{STIX Two Math}[version=stix2_128]
+%\setmainfont{STIX Two Text}
+%\mathversion{stix2_128}
+
+%% Choosing XITS as our font
+% \setmathfont{XITS Math}[version=xits]
+% \setmainfont{XITS}
+% \mathversion{xits}
+
+%% Choosing TeX Gyre Pagella as our font
+% \setmathfont{TeX Gyre Pagella Math}[version=pagella]
+% \setmainfont{TeX Gyre Pagella}
+% \mathversion{pagella}
+
+%%%%%%%%%%%%%%%%%
+%% Page style
+
+% Style 2: Sets Page Number at the Bottom with Chapter/Section Name on LO/RE
+\fancypagestyle{UUCSstyle}{
+%   \renewcommand{\chaptermark}[1]{\markboth{##1}{}}
+%   \renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1}}
+%   \fancyhf{}
+%   \fancyhead[RO]{\bfseries\nouppercase \rightmark}
+%   \fancyhead[LE]{\bfseries \nouppercase \leftmark}
+%   \fancyfoot[C]{\thepage}
+% }
+  \renewcommand{\chaptermark}[1]{\markboth{##1}{}}
+  \renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1\ }}
+  \fancyhf{}
+  \fancyhead[RO]{\nouppercase \rightmark\hspace{0.25em} | 
+    \hspace{0.25em} \bfseries{\thepage}}
+  \fancyhead[LE]{ {\bfseries\thepage} \hspace{0.25em} | 
+    \hspace{0.25em} \nouppercase \leftmark}
 }
-\ProcessOptions\relax 
-%% This finishes the 'options' section
+\pagestyle{fancy}
+\pagestyle{UUCSstyle}
+
+\fancypagestyle{plain}{
+  \fancyhead{}
+  \renewcommand{\headrulewidth}{0pt}
+}
 
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
@@ -37,7 +169,6 @@
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for horizontal lines, change thickness here
 
-%% Took from Dissertate @ https://github.com/suchow/Dissertate commit 58b4f
 \newcommand{\dnormalspacing}{1.2}
 \newcommand{\dcompressedspacing}{1.0}
 
@@ -69,11 +200,11 @@
 %%%%%%%%%%%%%%%%%
 
 %% Margins and Geomtry config
-\geometry{lmargin=.12\textwidth}
-\geometry{rmargin=.12\textwidth}
-\geometry{tmargin=.15\textheight}
-\geometry{twoside,bindingoffset=1cm}
-\savegeometry{uustthesis-geometry}
+% \geometry{lmargin=.12\textwidth}
+% \geometry{rmargin=.12\textwidth}
+% \geometry{tmargin=.15\textheight}
+% \geometry{twoside,bindingoffset=1cm}
+% \savegeometry{uustthesis-geometry}
 
 % Headings and headers.
 \RequirePackage{fancyhdr}
@@ -92,40 +223,16 @@
 \renewcommand\listtablename{Listing of tables}
 
 
-%% Font Confiruation using unicode-math package
-%% https://tex.stackexchange.com/questions/30049/how-to-select-math-font-in-document#30066
-%%
-%% WARNING: Fonts must be installed locally; to do so,
-%%          run 'make fonts'
-\defaultfontfeatures{Scale=MatchLowercase}
-
-%% Choosing STIX Two as our font
-%%
-%% This also loads some fancier stylistic sets for \mathcal and stuff.
-\setmathfont{STIX Two Math}[StylisticSet={1,2,8}, version=stix2_128]
-% \setmathfont{STIX Two Math}[version=stix2_128]
-\setmainfont{STIX Two Text}
-\mathversion{stix2_128}
-
-%% Choosing XITS as our font
-% \setmathfont{XITS Math}[version=xits]
-% \setmainfont{XITS}
-% \mathversion{xits}
-
-%% Choosing TeX Gyre Pagella as our font
-% \setmathfont{TeX Gyre Pagella Math}[version=pagella]
-% \setmainfont{TeX Gyre Pagella}
-% \mathversion{pagella}
 
 %% Fancy Chapter Headers
-\RequirePackage{quotchap}
-%% Hacking quotchap
-\renewcommand*{\chapnumfont}{%
-  \fontsize{100}{130}\selectfont% Default: 100/130
-  \color{chaptergrey}%
-}
-\renewcommand*{\chapterheadstartvskip}{\vspace*{-4\baselineskip}}
-\renewcommand*{\chapterheadendvskip}{\vspace{0.8\baselineskip}}
+% \RequirePackage{quotchap}
+% %% Hacking quotchap
+% \renewcommand*{\chapnumfont}{%
+%   \fontsize{100}{130}\selectfont% Default: 100/130
+%   \color{chaptergrey}%
+% }
+% \renewcommand*{\chapterheadstartvskip}{\vspace*{-4\baselineskip}}
+% \renewcommand*{\chapterheadendvskip}{\vspace{0.8\baselineskip}}
 
 
 
@@ -188,7 +295,7 @@
 \end{center}
 %%%%%%%%%%%%
 %% Restore our previous geometry
-\restoregeometry
+% \restoregeometry
 }
 
 %% End of title page

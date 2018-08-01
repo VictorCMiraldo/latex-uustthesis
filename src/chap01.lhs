@@ -29,6 +29,16 @@ magnis dis parturient montes, nascetur ridiculus mus. Sed pulvinar
 magna ac sodales sollicitudin. Sed auctor mauris feugiat metus
 imperdiet congue.
 
+\begin{align}
+CIF: \hspace*{5mm}F_0^j(a) = \frac{1}{2\pi \iota} \oint_{\gamma} \frac{F_0^j(z)}{z - a} dz
+\end{align}
+
+\texttt{Some texttt lorem ipsum
+magnis dis parturient montes, nascetur ridiculus mus. Sed pulvinar
+magna ac sodales sollicitudin. Sed auctor mauris feugiat metus
+imperdiet congue.}
+
+
 \paragraph{Test} Testing some bigger text:
 
 { \huge Some big test with numbers 123 }
