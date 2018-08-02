@@ -199,20 +199,6 @@ I'll pass it to 'book' just in case.}
 \renewcommand\listfigurename{Listing of figures}
 \renewcommand\listtablename{Listing of tables}
 
-
-
-%% Fancy Chapter Headers
-% \RequirePackage{quotchap}
-% %% Hacking quotchap
-% \renewcommand*{\chapnumfont}{%
-%   \fontsize{100}{130}\selectfont% Default: 100/130
-%   \color{chaptergrey}%
-% }
-% \renewcommand*{\chapterheadstartvskip}{\vspace*{-4\baselineskip}}
-% \renewcommand*{\chapterheadendvskip}{\vspace{0.8\baselineskip}}
-
-
-
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
 %%  Title Page  %%
@@ -283,10 +269,26 @@ I'll pass it to 'book' just in case.}
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
 
-% 
-% \titleformat{\chapter}[block]%
-% {\bfseries\Large\filleft}%
+\RequirePackage{tikz}
+\RequirePackage{titlesec}
+\titleformat%
+%Command to change
+{\chapter}%
+%Style to use
+[block]%
+% Format
+{\bfseries\Large}%
+% The chapter label
 % {\Huge\color{gray}\thechapter}%
-% {1em}
-% {\hfill\Huge\scshape}%
-% [\HRule]
+{
+\begin{flushright}
+\begin{tikzpicture}
+  \draw[fill,color=black] (0,0) rectangle (2cm,2cm);
+  \draw[color=white] (1cm,1cm) node { \fontsize{40}{70}\selectfont\thechapter };
+\end{tikzpicture}
+\end{flushright}
+}%
+% Separation between label and title body
+{1em}%
+% Before command
+{\hfill\Huge\scshape}%
