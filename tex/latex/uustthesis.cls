@@ -32,9 +32,11 @@
 \newcommand\PHD@papersize{a4paper} % Set Default as a4paper
 \DeclareOption{a4paper}{\renewcommand\PHD@papersize{a4paper}}
 \DeclareOption{a5paper}{\renewcommand\PHD@papersize{a5paper}}
+\DeclareOption{b5paper}{\renewcommand\PHD@papersize{b5paper}}
 \DeclareOption{letterpaper}{
   \ClassWarning{uustthesis}{The University of Utrecht
-    thesis guidelines recommend using A4 or A5paper}
+    thesis guidelines recommend using A4 for MSc thesis
+    and B5 for PhD thesis.}
   \renewcommand\PHD@papersize{letterpaper}
 }
 
@@ -43,10 +45,6 @@
 % Column layout
 \DeclareOption{oneside}{\PassOptionsToClass{\CurrentOption}{book}}%
 \DeclareOption{twoside}{\PassOptionsToClass{\CurrentOption}{book}}%
-
-%% Paper sizes are handled by the geometry package.
-% \DeclareOption{a4paper}{\PassOptionsToClass{a4paper}{book}\geometry{a4paper}}
-% \DeclareOption{a5paper}{\passOptionsToClass{a5paper}{book}\geometry{a5paper}}
 
 %% Here we can pass undeclared options to some class
 %% or package
@@ -61,19 +59,19 @@ I'll pass it to 'book' just in case.}
 %% We'll build on top of the 'book' class.
 \LoadClass{book}
 
-%%%%%%%%%%%%%%%%
-%% Font setup %%
-%%%%%%%%%%%%%%%%
 
 %% Necessary Packags
-\RequirePackage{geometry}
-\RequirePackage{fancyhdr}
+\RequirePackage{tikz}
 \RequirePackage{xcolor}
 \RequirePackage{ccaption}
 \RequirePackage{graphicx}
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{unicode-math}
+
+%%%%%%%%%%%%%%%%
+%% Font setup %%
+%%%%%%%%%%%%%%%%
 
 %% Font Confiruation using unicode-math package
 %% https://tex.stackexchange.com/questions/30049/how-to-select-math-font-in-document#30066
@@ -109,34 +107,6 @@ I'll pass it to 'book' just in case.}
 % \setmathfont{TeX Gyre Pagella Math}[version=pagella]
 % \setmainfont{TeX Gyre Pagella}
 % \mathversion{pagella}
-
-%%%%%%%%%%%%%%%%%
-%% Page style
-
-% Style 2: Sets Page Number at the Bottom with Chapter/Section Name on LO/RE
-\fancypagestyle{UUCSstyle}{
-%   \renewcommand{\chaptermark}[1]{\markboth{##1}{}}
-%   \renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1}}
-%   \fancyhf{}
-%   \fancyhead[RO]{\bfseries\nouppercase \rightmark}
-%   \fancyhead[LE]{\bfseries \nouppercase \leftmark}
-%   \fancyfoot[C]{\thepage}
-% }
-  \renewcommand{\chaptermark}[1]{\markboth{##1}{}}
-  \renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1\ }}
-  \fancyhf{}
-  \fancyhead[RO]{\nouppercase \rightmark\hspace{0.25em} | 
-    \hspace{0.25em} \bfseries{\thepage}}
-  \fancyhead[LE]{ {\bfseries\thepage} \hspace{0.25em} | 
-    \hspace{0.25em} \nouppercase \leftmark}
-}
-\pagestyle{fancy}
-\pagestyle{UUCSstyle}
-
-\fancypagestyle{plain}{
-  \fancyhead{}
-  \renewcommand{\headrulewidth}{0pt}
-}
 
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
@@ -199,6 +169,29 @@ I'll pass it to 'book' just in case.}
 \renewcommand\listfigurename{Listing of figures}
 \renewcommand\listtablename{Listing of tables}
 
+%%%%%%%%%%%%%%%%
+%% Page style %%
+%%%%%%%%%%%%%%%%
+
+%% Adds the uppercase title of the current chapter to
+%% the top of the page, centered. Numbers go alternating
+%% left to right or centered, depending on oneside or twoside options.
+\pagestyle{fancy}
+\fancypagestyle{UUCSstyle}{
+  \renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{##1}}{}}
+  \fancyhead{}
+  \fancyfoot{}
+  \renewcommand{\headrulewidth}{0pt}
+  \fancyhead[C]{\leftmark}
+  \fancyfoot[RE,LO]{\thepage}
+}
+\pagestyle{UUCSstyle}
+
+\fancypagestyle{plain}{
+  \fancyhead{}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
 %%  Title Page  %%
@@ -212,7 +205,7 @@ I'll pass it to 'book' just in case.}
 \renewcommand{\maketitle}{
 %%%%%%%%%%%%%
 %% Custom title page geometry
-\newgeometry{left=3cm,right=3cm}
+%\newgeometry{left=3cm,right=3cm}
 \thispagestyle{empty}
 \begin{center}
 %%%%%%%%%%%%%
@@ -269,8 +262,6 @@ I'll pass it to 'book' just in case.}
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
 
-\RequirePackage{tikz}
-\RequirePackage{titlesec}
 \titleformat%
 %Command to change
 {\chapter}%
