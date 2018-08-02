@@ -283,3 +283,21 @@ I'll pass it to 'book' just in case.}
 {1em}%
 % Before command
 {\hfill\Huge\scshape}%
+
+% \titleformat%
+% %Command to change
+% {\section}%
+% % Format
+% {\large}%
+% % The chapter label
+% % {\Huge\color{gray}\thechapter}%
+% {
+% \begin{tikzpicture}
+%   \draw[fill,color=black] (0,0) rectangle (0.5cm,0.5cm);
+%   \draw[color=white] (0.25cm,0.25cm) node { \fontsize{10}{40}\selectfont\thesection };
+% \end{tikzpicture}
+% }%
+% % Separation between label and title body
+% {.5em}%
+% % Before command
+% {\large\scshape}%
