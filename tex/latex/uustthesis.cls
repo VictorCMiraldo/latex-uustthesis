@@ -20,25 +20,6 @@
 %%   - https://github.com/kks32/phd-thesis-template/blob/master/Classes/PhDThesisPSnPDF.cls
 %%
 
-%%%%%%%%%%%%%%%%
-%% Font setup %%
-%%%%%%%%%%%%%%%%
-
-% Font is not set
-\newif\ifsetFont\setFontfalse
-
-%% Using xits2 with math support
-%% 
-\newif\ifUUCS@stixtwo\UUCS@stixtwofalse
-\DeclareOption{stixtwo}{
-  \ifsetFont
-    \ClassWarning{uustthesis}{Font already set; check class file options!}
-  \else
-    \UUCS@stixtwotrue
-    \setFonttrue
-  \fi
-}
-
 % Font Size
 \DeclareOption{10pt}{
   \ClassWarning{uustthesis}{A fontsize of 10pt is very small. Consider 11pt or 12pt.}
@@ -101,20 +82,16 @@ I'll pass it to 'book' just in case.}
 %%          run 'make fonts'
 \defaultfontfeatures{Scale=MatchLowercase}
 
-\ifUUCS@stixtwo
-\setmathfont{STIX Two Math}[StylisticSet={1,2,8}, version=stix2_128]
-\setmainfont{STIX Two Math}
-\mathversion{stix2_128}
-\fi 
+\setmainfont[
+    Path           = ./tex/latex/fonts/,
+    BoldFont       = STIXTwoText-Bold.otf,
+    ItalicFont     = STIXTwoText-Italic.otf,
+    BoldItalicFont = STIXTwoText-BoldItalic.otf,
+]{STIXTwoText-Regular.otf}
+\usepackage{eulervm}
 
-\ifsetFont
-\else
-\ClassWarning{uustthesis}{Font not set, defualting to Latin Modern}
-\setmathfont{Latin Modern Math}[version=lm]
-\setmainfont{Latin Modern Math}
-\mathversion{lm}
-\fi
-
+%% Other font combos possible:
+%%
 %% Choosing STIX Two as our font
 %%
 %% This also loads some fancier stylistic sets for \mathcal and stuff.

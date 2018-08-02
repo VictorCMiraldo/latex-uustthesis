@@ -1,6 +1,6 @@
 
-Pellentesque diam felis, vulputate quis dui vel, lacinia ultricies
-justo. Nunc sit amet mattis ligula, suscipit tempor orci. Donec
+\textbf{Pellentesque diam felis}, \textsc{vulputate quis} dui vel, lacinia ultricies
+justo. Nunc sit amet mattis \textit{\textbf{ligula}, suscipit tempor orci}. Donec
 pretium et ipsum at tempor. Pellentesque ac ligula faucibus, auctor
 risus sed, mollis tortor. Sed accumsan sit amet enim tempor
 mattis. Aliquam erat volutpat. Etiam vitae varius arcu. Nulla

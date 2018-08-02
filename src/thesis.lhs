@@ -1,4 +1,4 @@
-\documentclass[stixtwo,12pt,a4paper,twoside]{uustthesis}
+\documentclass[10pt,a4paper]{uustthesis}
 
 \title{Testing}
 \author{Tester}
