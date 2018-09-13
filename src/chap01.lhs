@@ -1,15 +1,9 @@
 
-\textbf{Pellentesque diam felis}, \textsc{vulputate quis} dui vel, lacinia ultricies
-justo. Nunc sit amet mattis \textit{\textbf{ligula}, suscipit tempor orci}. Donec
-pretium et ipsum at tempor. Pellentesque ac ligula faucibus, auctor
-risus sed, mollis tortor. Sed accumsan sit amet enim tempor
-mattis. Aliquam erat volutpat. Etiam vitae varius arcu. Nulla
-ullamcorper suscipit nisl et placerat. Sed ut venenatis neque. In
-sapien libero, feugiat id iaculis quis, finibus non ante. Vivamus
-placerat facilisis massa nec congue. Orci varius natoque penatibus et
-magnis dis parturient montes, nascetur ridiculus mus. Sed pulvinar
-magna ac sodales sollicitudin. Sed auctor mauris feugiat metus
-imperdiet congue.
+\section{Testing Fonts}
+
+\subsection{Code Blocks}
+
+  Below is the factorial function written in Haskell~\cite{ghcUsersGuide} and a paragraph of lorem ipsum:
 
 \begin{code}
 fat :: Int -> Int
@@ -17,34 +11,47 @@ fat 0  = 1
 fat n  = n * fat (n-1)
 \end{code}
 
-Pellentesque diam felis, vulputate quis dui vel, lacinia ultricies
-justo. Nunc sit amet mattis ligula, suscipit tempor orci. Donec
-pretium et ipsum at tempor. Pellentesque ac ligula faucibus, auctor
-risus sed, mollis tortor. Sed accumsan sit amet enim tempor
-mattis. Aliquam erat volutpat. Etiam vitae varius arcu. Nulla
-ullamcorper suscipit nisl et placerat. Sed ut venenatis neque. In
-sapien libero, feugiat id iaculis quis, finibus non ante. Vivamus
-placerat facilisis massa nec congue. Orci varius natoque penatibus et
-magnis dis parturient montes, nascetur ridiculus mus. Sed pulvinar
-magna ac sodales sollicitudin. Sed auctor mauris feugiat metus
-imperdiet congue.
+\lipsum[1]
 
+\subsection{Math Fonts}
+
+  Below is some math to display our math font:
 \begin{align}
+\label{eq:ref}
 CIF: \hspace*{5mm}F_0^j(a) = \frac{1}{2\pi \iota} \oint_{\gamma} \frac{F_0^j(z)}{z - a} dz
 \end{align}
 
-\texttt{Some texttt lorem ipsum
-magnis dis parturient montes, nascetur ridiculus mus. Sed pulvinar
-magna ac sodales sollicitudin. Sed auctor mauris feugiat metus
-imperdiet congue.}
+  And we will even reference \Cref{eq:ref} and \Cref{eq:euler} to see
+how references and figures look like.
 
+\begin{figure}
+\begin{equation*}
+e^{i*\pi} + 1 \equiv 0
+\end{equation*}
+\caption{Euler's Equation}
+\label{eq:euler}
+\end{figure}
 
-\paragraph{Test} Testing some bigger text:
+\subsection{Latex Font Face}
 
-{ \huge Some big test with numbers 123 }
+\begin{table}\centering
+\begin{tabular}{@@{}lll@@{}}\toprule
+             & Plain Text                  & With Faces           \\ \midrule
+  bold face  & Stay bold, pony boy!        & \textbf{Stay bold, pony boy!} \\
+  italic     & Just like the tower of piza & \textit{Just like the tower of piza} \\
+  small caps & This is In Camel Case       & \textsc{This Is In Camel Case}  \\
+  typewriter & Some text here              & \texttt{Some text here} \\
+\bottomrule
+\end{tabular}
+\caption{Some Table}
+\end{table}
 
-Normal stuff here:
+\paragraph{Combos} 
+  \begin{enumerate}
+    \item \textbf{\textit{Boldface and italic}}
+    \item \textbf{\texttt{Boldface and typewriter}}
+  \end{enumerate}
 
-\begin{equation}
-\scalebox{2}{$e^{i \pi} - 1 = 0$}
-\end{equation}
+\section{Testing Page Layouts}
+
+\lipsum[1-10]

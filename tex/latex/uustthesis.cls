@@ -39,12 +39,15 @@
     and B5 for PhD thesis.}
   \renewcommand\PHD@papersize{letterpaper}
 }
-
 \PassOptionsToClass{\PHD@papersize}{book}%
 
 % Column layout
-\DeclareOption{oneside}{\PassOptionsToClass{\CurrentOption}{book}}%
-\DeclareOption{twoside}{\PassOptionsToClass{\CurrentOption}{book}}%
+\newcommand\PHD@numsides{twoside}
+\newif\ifPHD@istwosides
+\PHD@istwosidestrue
+\DeclareOption{oneside}{\renewcommand\PHD@numsides{oneside} \PHD@istwosidesfalse}%
+\DeclareOption{twoside}{\renewcommand\PHD@numsides{twoside}}%
+\PassOptionsToClass{\CurrentOption}{\PHD@numsides}
 
 %% Here we can pass undeclared options to some class
 %% or package
@@ -65,6 +68,7 @@ I'll pass it to 'book' just in case.}
 \RequirePackage{xcolor}
 \RequirePackage{ccaption}
 \RequirePackage{graphicx}
+\RequirePackage{setspace}
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{unicode-math}
@@ -75,9 +79,6 @@ I'll pass it to 'book' just in case.}
 
 %% Font Confiruation using unicode-math package
 %% https://tex.stackexchange.com/questions/30049/how-to-select-math-font-in-document#30066
-%%
-%% WARNING: Fonts must be installed locally; to do so,
-%%          run 'make fonts'
 \defaultfontfeatures{Scale=MatchLowercase}
 
 \setmainfont[
@@ -87,26 +88,6 @@ I'll pass it to 'book' just in case.}
     BoldItalicFont = STIXTwoText-BoldItalic.otf,
 ]{STIXTwoText-Regular.otf}
 \usepackage{eulervm}
-
-%% Other font combos possible:
-%%
-%% Choosing STIX Two as our font
-%%
-%% This also loads some fancier stylistic sets for \mathcal and stuff.
-%\setmathfont{STIX Two Math}[StylisticSet={1,2,8}, version=stix2_128]
-% \setmathfont{STIX Two Math}[version=stix2_128]
-%\setmainfont{STIX Two Text}
-%\mathversion{stix2_128}
-
-%% Choosing XITS as our font
-% \setmathfont{XITS Math}[version=xits]
-% \setmainfont{XITS}
-% \mathversion{xits}
-
-%% Choosing TeX Gyre Pagella as our font
-% \setmathfont{TeX Gyre Pagella Math}[version=pagella]
-% \setmainfont{TeX Gyre Pagella}
-% \mathversion{pagella}
 
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
@@ -146,8 +127,15 @@ I'll pass it to 'book' just in case.}
 %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%
 
+
+\RequirePackage{geometry}
 %% Margins and Geomtry config
-% \geometry{lmargin=.12\textwidth}
+\geometry{\PHD@papersize}
+\geometry{inner=.15\paperwidth , outer=.15\paperwidth}
+\ifPHD@istwosides
+  \geometry{\PHD@numsides}
+  \geometry{bindingoffset=.05\paperwidth}
+\fi
 % \geometry{rmargin=.12\textwidth}
 % \geometry{tmargin=.15\textheight}
 % \geometry{twoside,bindingoffset=1cm}
@@ -205,7 +193,7 @@ I'll pass it to 'book' just in case.}
 \renewcommand{\maketitle}{
 %%%%%%%%%%%%%
 %% Custom title page geometry
-%\newgeometry{left=3cm,right=3cm}
+\newgeometry{left=3cm,right=3cm}
 \thispagestyle{empty}
 \begin{center}
 %%%%%%%%%%%%%
@@ -251,7 +239,7 @@ I'll pass it to 'book' just in case.}
 \end{center}
 %%%%%%%%%%%%
 %% Restore our previous geometry
-% \restoregeometry
+\restoregeometry
 }
 
 %% End of title page
@@ -301,3 +289,15 @@ I'll pass it to 'book' just in case.}
 % {.5em}%
 % % Before command
 % {\large\scshape}%
+
+%%%%%%%%%%%%%%%%%%%%%%
+%% General Packages %%
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{cleveref}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{hyperref}
+
+%% Recommented to give more professionally-looking tables.
+\renewcommand{\arraystretch}{1.3}
