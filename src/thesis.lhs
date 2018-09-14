@@ -8,8 +8,18 @@
 
 %include lhs2TeX.fmt
 \begin{document}
-  \maketitle
-  \tableofcontents
+%% Set up the front matter of our book
+\frontmatter
+\tableofcontents
+
+\chapter{Declaration}
+
+\chapter{Preface}
+
+\chapter{Abstract}
+
+%% Starts the mainmatter
+\mainmatter
 
 \chapter{Introduction}
 %include src/chap01.lhs

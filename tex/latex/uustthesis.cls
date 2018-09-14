@@ -167,12 +167,15 @@ I'll pass it to 'book' just in case.}
 \pagestyle{fancy}
 \fancypagestyle{UUCSstyle}{
   \renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{##1}}{}}
+  \renewcommand{\sectionmark}[1]{\markright{\MakeUppercase{##1}}{}}
   \fancyhead{}
   \fancyfoot{}
   \renewcommand{\headrulewidth}{0pt}
-  \fancyhead[C]{\leftmark}
-  \fancyfoot[RE,LO]{\thepage}
+  \fancyfoot[RE, LO]{\thepage}
+  \fancyfoot[CO]{\leftmark}
+  \fancyfoot[CE]{\rightmark}
 }
+
 \pagestyle{UUCSstyle}
 
 \fancypagestyle{plain}{
