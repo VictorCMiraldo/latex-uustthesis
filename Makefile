@@ -58,7 +58,7 @@ dist/$(TGT).aux: default
 bib: references.bib dist/$(TGT).aux
 	bibtex dist/$(TGT).aux
 	export TEXMFHOME=".:$(TEXMFHOME)" && \
-	$(LATEX) src/$(TGT).tex
+	$(LATEX) $(MAIN_FILE)
 
 ## Standard cleanup
 clean:

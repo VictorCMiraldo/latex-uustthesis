@@ -1,5 +1,6 @@
 
 \section{Testing Fonts}
+\label{sec:testing}
 
 \subsection{Code Blocks}
 
@@ -17,12 +18,12 @@ fat n  = n * fat (n-1)
 
   Below is some math to display our math font:
 \begin{align}
-\label{eq:ref}
 CIF: \hspace*{5mm}F_0^j(a) = \frac{1}{2\pi \iota} \oint_{\gamma} \frac{F_0^j(z)}{z - a} dz
+\label{eq:ref}
 \end{align}
 
   And we will even reference \Cref{eq:ref} and \Cref{eq:euler} to see
-how references and figures look like.
+how references and figures look like. For the sake of testing \Cref{sec:testing}.
 
 \begin{figure}
 \begin{equation*}

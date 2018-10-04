@@ -66,6 +66,7 @@ I'll pass it to 'book' just in case.}
 %% Necessary Packags
 \RequirePackage{tikz}
 \RequirePackage{xcolor}
+\RequirePackage{ccaption}
 \RequirePackage{graphicx}
 \RequirePackage{setspace}
 \RequirePackage{amsmath}
@@ -149,8 +150,10 @@ I'll pass it to 'book' just in case.}
 \RequirePackage{titling}
 
 \RequirePackage{caption}
-\captionsetup[table]{labelfont={sc},textfont={sl},justification=RaggedRight,singlelinecheck=false}
-\captionsetup[figure]{labelfont={sc},textfont={sl},justification=RaggedRight,singlelinecheck=false}
+\captionsetup[table]{labelfont={sc},textfont={sl},justification=RaggedRight}
+\captionsetup[figure]{labelfont={sc},textfont={sl},justification=RaggedRight}
+% \captionsetup[table]{labelfont={sc},textfont={sl},justification=RaggedRight,singlelinecheck=false}
+% \captionsetup[figure]{labelfont={sc},textfont={sl},justification=RaggedRight,singlelinecheck=false}
 
 % Front matter.
 \setcounter{tocdepth}{1}
@@ -301,10 +304,12 @@ I'll pass it to 'book' just in case.}
 %% General Packages %%
 %%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage{cleveref}
 \usepackage{booktabs}
 \usepackage{multirow}
+
+% hyperref MUST be loaded first. Check section 14.1 of cleveref manual.
 \usepackage{hyperref}
+\usepackage{cleveref}
 
 %% Recommented to give more professionally-looking tables.
 \renewcommand{\arraystretch}{1.3}
