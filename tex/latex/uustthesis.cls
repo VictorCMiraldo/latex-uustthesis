@@ -21,10 +21,7 @@
 %%
 
 % Font Size
-\DeclareOption{10pt}{
-  \ClassWarning{uustthesis}{A fontsize of 10pt is very small. Consider 11pt or 12pt.}
-  \PassOptionsToClass{10pt}{book}%
-}
+\DeclareOption{10pt}{\PassOptionsToClass{10pt}{book}}%
 \DeclareOption{11pt}{\PassOptionsToClass{11pt}{book}}%
 \DeclareOption{12pt}{\PassOptionsToClass{12pt}{book}}%
 
@@ -127,7 +124,6 @@ I'll pass it to 'book' just in case.}
 %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%
 
-
 \RequirePackage{geometry}
 %% Margins and Geomtry config
 \geometry{\PHD@papersize}
@@ -196,57 +192,95 @@ I'll pass it to 'book' just in case.}
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
 
-%% Declare a supervisor variable for our title page.
-\let\@supervisor\@empty
-\newcommand{\supervisor}[1]{\gdef\@supervisor{#1}}
+\let\@promotor\@empty
+\newcommand{\promotor}[1]{\gdef\@promotor{#1}}
+
+\let\@copromotor\@empty
+\newcommand{\copromotor}[1]{\gdef\@copromotor{#1}}
+
+\let\@NWOproject\@empty
+\newcommand{\NWOproject}[1]{\gdef\@NWOproject{#1}}
+
+\let\@NWOgrantnumber\@empty
+\newcommand{\NWOgrantnumber}[1]{\gdef\@NWOgrantnumber{#1}}
+
+\let\@defensedate\@empty
+\newcommand{\defensedate}[1]{\gdef\@defensedate{#1}}
+
+\let\@authorbirthdate\@empty
+\newcommand{\authorbirthdate}[1]{\gdef\@authorbirthdate{#1}}
+
+\let\@authorbirthplace\@empty
+\newcommand{\authorbirthplace}[1]{\gdef\@authorbirthplace{#1}}
+
+\let\@titleDUTCH\@empty
+\newcommand{\titleDUTCH}[1]{\gdef\@titleDUTCH{#1}}
 
 \renewcommand{\maketitle}{
 %%%%%%%%%%%%%
 %% Custom title page geometry
-\newgeometry{left=3cm,right=3cm}
+\newgeometry{left=0.17\paperwidth,right=0.17\paperwidth,bindingoffset=6mm}
 \thispagestyle{empty}
+\begingroup
+% \fontsize{9pt}{7pt}\selectfont
 \begin{center}
 %%%%%%%%%%%%%
 %% Headings
-  \begin{minipage}{0.25\textwidth}%
-  \includegraphics[width=.8\textwidth]{img/logo.pdf}%
-  \end{minipage}
-  ~
-  \begin{minipage}{0.7\textwidth}%
-  \begin{flushleft}
-  \textsc{\huge Universiteit Utrecht}\vskip 1.5em
-  \textsc{\Large Faculty of Science}\vskip 0.5em
-  \textsc{\large Dept. of Information and Computing Sciences}%
-  \end{flushleft}
-  \end{minipage}
-%%%%%%%%%%%
-%% Title
-  \vfill
-  \HRule\vskip 1.5em
-  {\huge\bfseries \@title }
-  \vskip 1em \HRule
-  \vfill
-%%%%%%%%%%
-%% Author(s)
-  \begin{minipage}{0.4\textwidth}
-    \begin{flushleft}\large
-    \textit{Author}\vskip .5em
-    \@author
-    \end{flushleft}
-  \end{minipage}
-  ~
-  \begin{minipage}{0.4\textwidth}
-  \begin{flushright}\large
-  \textit{Supervisor}\vskip .5em
-  \@supervisor
-  \end{flushright}
-  \end{minipage}
-  \vfill\vfill\vfill
-%%%%%%%%%%%%
-%% Date
-  {\large\@date} 
-  \vfill\newpage
+  \vspace*{0.12\paperheight} % 2cm on b5
+  \begin{LARGE}
+  {\bf \@title}
+  \end{LARGE}
+  \vspace*{0.08\paperheight} % 1.5cm on b5
+  
+  \begin{Large}
+  \@titleDUTCH
+  \vspace{0.008\paperheight} % 0.2cm on b5
+
+  (met een samenvatting in het Nederlands)
+  \end{Large}
+
+  \vspace{0.2\paperheight} % 4.7cm on b5
+  
+  Proefschrift
+
+  \
+
+  \begin{tabular}{p{0.8\textwidth}}
+  ter verkrijging van de graad van doctor aan de Universiteit Utrecht op
+  gezag van de rector magnificus, prof. dr. G.J. van der Zwaan, ingevolge
+  het besluit van het college voor promoties in het openbaar te verdedigen
+  op \@defensedate
+  % op maandag 23 april 2018 des ochtends te 10.30 uur
+  \end{tabular}
+
+  \
+
+  door
+
+  \
+
+  {\Large \@author}
+
+  \
+
+  geboren op \@authorbirthdate \\
+  te \@authorbirthplace
 \end{center}
+\newpage
+\thispagestyle{empty}
+\noindent
+\begin{tabular}{ll}
+Promotor: & \@promotor \\
+Copromotor: & \@copromotor
+\end{tabular}
+
+\vspace{0.588\paperheight}
+
+\noindent Dit proefschrift werd (mede) mogelijk gemaakt met financiële
+steun van de \\
+Nederlandse Organisatie voor Wetenschappelijk Onderzoek (NWO), \\
+project \@NWOproject{} (\@NWOgrantnumber).
+\endgroup
 %%%%%%%%%%%%
 %% Restore our previous geometry
 \restoregeometry
@@ -281,24 +315,6 @@ I'll pass it to 'book' just in case.}
 {1em}%
 % Before command
 {\Huge\scshape}%
-
-% \titleformat%
-% %Command to change
-% {\section}%
-% % Format
-% {\large}%
-% % The chapter label
-% % {\Huge\color{gray}\thechapter}%
-% {
-% \begin{tikzpicture}
-%   \draw[fill,color=black] (0,0) rectangle (0.5cm,0.5cm);
-%   \draw[color=white] (0.25cm,0.25cm) node { \fontsize{10}{40}\selectfont\thesection };
-% \end{tikzpicture}
-% }%
-% % Separation between label and title body
-% {.5em}%
-% % Before command
-% {\large\scshape}%
 
 %%%%%%%%%%%%%%%%%%%%%%
 %% General Packages %%

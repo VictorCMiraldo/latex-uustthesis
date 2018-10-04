@@ -2,9 +2,20 @@
 
 \usepackage{lipsum}
 
-\title{Testing}
-\author{Tester}
-\supervisor{Supervisor 1 \\ Supervisor 2}
+\title{Testing A Large Title YAY}
+\titleDUTCH{Same title in Dutch}
+
+\author{Victor Cacciari Miraldo}
+
+\promotor{Prof.dr. J.T. Jeuring}
+\copromotor{Dr. W. Swierstra}
+
+\NWOproject{nwo project name here}
+\NWOgrantnumber{111.111.111}
+
+\defensedate{hopefuly, in the future!}
+\authorbirthdate{october 16, 1991}
+\authorbirthplace{S\~{a}o Paulo, Brasil}
 
 %include lhs2TeX.fmt
 \begin{document}
