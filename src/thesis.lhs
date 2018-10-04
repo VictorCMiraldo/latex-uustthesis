@@ -1,4 +1,4 @@
-\documentclass[10pt,a4paper]{uustthesis}
+\documentclass[10pt,b5paper]{uustthesis}
 
 \usepackage{lipsum}
 
@@ -8,6 +8,7 @@
 
 %include lhs2TeX.fmt
 \begin{document}
+\maketitle
 %% Set up the front matter of our book
 \frontmatter
 \tableofcontents
@@ -21,6 +22,7 @@
 %% Starts the mainmatter
 \mainmatter
 
+\cleardoublepage
 \chapter{Introduction}
 %include src/chap01.lhs
 

@@ -66,7 +66,6 @@ I'll pass it to 'book' just in case.}
 %% Necessary Packags
 \RequirePackage{tikz}
 \RequirePackage{xcolor}
-\RequirePackage{ccaption}
 \RequirePackage{graphicx}
 \RequirePackage{setspace}
 \RequirePackage{amsmath}
@@ -131,15 +130,16 @@ I'll pass it to 'book' just in case.}
 \RequirePackage{geometry}
 %% Margins and Geomtry config
 \geometry{\PHD@papersize}
-\geometry{inner=.15\paperwidth , outer=.15\paperwidth}
+% https://tex.stackexchange.com/questions/249190/recommended-margin-and-binding-offset
+\geometry{textwidth=.666\paperwidth}
+\geometry{textheight=.72\paperheight}
+\geometry{marginratio={4:6,5:7}}
+\geometry{nofoot}
+% \geometry{showframe}
 \ifPHD@istwosides
   \geometry{\PHD@numsides}
-  \geometry{bindingoffset=.05\paperwidth}
+  \geometry{bindingoffset=6mm}
 \fi
-% \geometry{rmargin=.12\textwidth}
-% \geometry{tmargin=.15\textheight}
-% \geometry{twoside,bindingoffset=1cm}
-% \savegeometry{uustthesis-geometry}
 
 % Headings and headers.
 \RequirePackage{fancyhdr}
@@ -147,6 +147,10 @@ I'll pass it to 'book' just in case.}
 \setlength{\headheight}{15pt}
 \pagestyle{plain}
 \RequirePackage{titling}
+
+\RequirePackage{caption}
+\captionsetup[table]{labelfont={sc},textfont={sl},justification=RaggedRight,singlelinecheck=false}
+\captionsetup[figure]{labelfont={sc},textfont={sl},justification=RaggedRight,singlelinecheck=false}
 
 % Front matter.
 \setcounter{tocdepth}{1}
@@ -171,9 +175,9 @@ I'll pass it to 'book' just in case.}
   \fancyhead{}
   \fancyfoot{}
   \renewcommand{\headrulewidth}{0pt}
-  \fancyfoot[RE, LO]{\thepage}
-  \fancyfoot[CO]{\leftmark}
-  \fancyfoot[CE]{\rightmark}
+  \fancyhead[RO, LE]{\thepage}
+  \fancyhead[CO]{\leftmark}
+  \fancyhead[CE]{\rightmark}
 }
 
 \pagestyle{UUCSstyle}
@@ -266,14 +270,14 @@ I'll pass it to 'book' just in case.}
 \begin{flushright}
 \begin{tikzpicture}
   \draw[fill,color=black] (0,0) rectangle (2cm,2cm);
-  \draw[color=white] (1cm,1cm) node { \fontsize{40}{70}\selectfont\thechapter };
+  \draw[color=white] (1cm,1cm) node { \fontsize{105}{130}\selectfont\thechapter };
 \end{tikzpicture}
 \end{flushright}
 }%
 % Separation between label and title body
 {1em}%
 % Before command
-{\hfill\Huge\scshape}%
+{\Huge\scshape}%
 
 % \titleformat%
 % %Command to change
