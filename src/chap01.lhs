@@ -10,6 +10,9 @@
 fat :: Int -> Int
 fat 0  = 1
 fat n  = n * fat (n-1)
+
+class SomeClass2 r where
+  method :: forall x . MyMethodType x -> r
 \end{code}
 
 \lipsum[1]
