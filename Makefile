@@ -64,6 +64,11 @@ bib: references.bib dist/$(TGT).aux
 clean:
 	cd dist && rm -rf * && cd ..
 
+## Install target for Nix
+install: default
+	cp -r dist/*  ${out}
+
+
 ## Installs the math fonts locally
 ## Unfortunately, this is necessary for
 ## loading mathfonts, even with XeTeX.
