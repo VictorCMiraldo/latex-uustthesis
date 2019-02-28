@@ -136,12 +136,15 @@ I'll pass it to 'book' just in case.}
 % https://tex.stackexchange.com/questions/249190/recommended-margin-and-binding-offset
 \geometry{textwidth=.666\paperwidth}
 \geometry{textheight=.72\paperheight}
-\geometry{marginratio={4:6,5:7}}
+\geometry{vmarginratio=5:7}
 \geometry{nofoot}
 % \geometry{showframe}
 \ifPHD@istwosides
+  \geometry{hmarginratio=4:6}
   \geometry{\PHD@numsides}
   \geometry{bindingoffset=6mm}
+\else
+  \geometry{centering}
 \fi
 
 % Headings and headers.
