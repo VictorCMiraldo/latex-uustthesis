@@ -46,6 +46,12 @@
 \DeclareOption{twoside}{\renewcommand\PHD@numsides{twoside}}%
 \PassOptionsToClass{\CurrentOption}{\PHD@numsides}
 
+\newif\ifPHD@ismsccover
+\PHD@ismsccoverfalse
+\DeclareOption{msc}{\PHD@ismsccovertrue}
+\DeclareOption{phd}{\PHD@ismsccoverfalse}
+
+
 %% Here we can pass undeclared options to some class
 %% or package
 \DeclareOption*{%
@@ -216,6 +222,64 @@ I'll pass it to 'book' just in case.}
 \let\@titleDUTCH\@empty
 \newcommand{\titleDUTCH}[1]{\gdef\@titleDUTCH{#1}}
 
+\ifPHD@ismsccover
+\renewcommand{\maketitle}{
+%%%%%%%%%%%%%
+%% Custom title page geometry
+\newgeometry{left=0.17\paperwidth,right=0.17\paperwidth,bindingoffset=6mm}
+\thispagestyle{empty}
+\begingroup
+% \fontsize{9pt}{7pt}\selectfont
+\begin{center}
+%%%%%%%%%%%%%
+%% Headings
+  \includegraphics[width=.14\paperwidth]{img/logo.pdf}
+
+  \vspace*{.5cm}
+
+  \begin{Large}
+  Utrecht University
+  \end{Large}
+
+  \begin{small}
+  Department of Computing Sciences
+  \end{small}
+
+  \vfill
+  
+  \begin{LARGE}
+  {\bf \@title}
+  \end{LARGE}
+
+  \vspace*{0.04\paperheight} % 1cm on b5
+  Master Thesis defended on \@defensedate, by:
+
+  \
+
+  {\Large \@author}
+
+
+  \vfill
+
+  Supervised by:
+
+  \@promotor 
+
+  \
+
+  \ifx\@copromotor\empty
+  \else
+    Cosupervised by:
+    
+    \@copromotor
+  \fi
+\end{center}
+\endgroup
+%%%%%%%%%%%%
+%% Restore our previous geometry
+\restoregeometry
+}
+\else
 \renewcommand{\maketitle}{
 %%%%%%%%%%%%%
 %% Custom title page geometry
@@ -285,6 +349,7 @@ project \@NWOproject{} (\@NWOgrantnumber).
 %% Restore our previous geometry
 \restoregeometry
 }
+\fi % PHD@ismsccover
 
 %% End of title page
 
