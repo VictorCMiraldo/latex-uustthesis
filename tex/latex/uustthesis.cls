@@ -51,6 +51,9 @@
 \DeclareOption{msc}{\PHD@ismsccovertrue}
 \DeclareOption{phd}{\PHD@ismsccoverfalse}
 
+\newif\ifPHD@isdrawseaweed
+\PHD@isdrawseaweedtrue
+\DeclareOption{noseaweed}{\PHD@isdrawseaweedfalse}
 
 %% Here we can pass undeclared options to some class
 %% or package
@@ -362,6 +365,43 @@ project \@NWOproject{} (\@NWOgrantnumber).
 %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%
 
+%% Latex L-System for drawing seaweeds
+\usetikzlibrary{positioning}
+\usetikzlibrary{lindenmayersystems}
+\pgfdeclarelindenmayersystem{FractalPlant}{
+  \rule{X -> F-[[X]+X]+F[+FX]-X}
+  \rule{F -> FF}}
+% \usetikzlibrary{shadings}
+
+%% necessary for the fancy text in white with black contour
+\RequirePackage{contour}
+\RequirePackage{calc}
+
+% Draws a seaweed, receives the amound of iterations desired
+\newcommand{\drawseaweed}[1]{
+\resizebox{4cm}{4cm}{%
+\ifPHD@isdrawseaweed
+\begin{tikzpicture}
+\draw [color=white, rotate=75]
+  [l-system={FractalPlant , axiom=X , order=#1+1 , step=10pt - #1 , angle=23}]
+  lindenmayer system;
+\end{tikzpicture}
+\else
+\begin{tikzpicture}
+\draw [fill,color=black] (0,0) rectangle (2cm , 2cm);
+\end{tikzpicture}
+\fi
+}
+}
+
+%% Our appendix has to stop the seaweed madness
+\renewcommand\appendix{\par
+\setcounter{chapter}{0}%
+\setcounter{section}{0}%
+\gdef\@chapapp{\appendixname}%
+\gdef\thechapter{\@Alph\c@chapter}%
+\PHD@isdrawseaweedfalse}
+
 \titleformat%
 %Command to change
 {\chapter}%
@@ -374,8 +414,13 @@ project \@NWOproject{} (\@NWOgrantnumber).
 {
 \begin{flushright}
 \begin{tikzpicture}
-  \draw[fill,color=black] (0,0) rectangle (2cm,2cm);
-  \draw[color=white] (1cm,1cm) node { \fontsize{105}{130}\selectfont\thechapter };
+  \draw[fill,color=black] (-1cm , -1cm) rectangle (4cm , 4cm);
+  \draw (1cm , 1cm) node { \drawseaweed{\c@chapter} };
+  \draw node {% 
+    \contourlength{.6mm}
+    \fontsize{105}{130}\selectfont{\contour[64]{black}{%
+       \protect\color{white}\thechapter}}
+  };
 \end{tikzpicture}
 \end{flushright}
 }%

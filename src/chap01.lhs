@@ -56,6 +56,14 @@ e^{i*\pi} + 1 \equiv 0
     \item \textbf{\texttt{Boldface and typewriter}}
   \end{enumerate}
 
+\begin{figure}
+\begin{tikzpicture}
+\draw [white!70!black , rotate=90]
+  [l-system={FractalPlant , axiom=X, order=2, step=2pt, angle=22.5}]
+  lindenmayer system;
+\end{tikzpicture}
+\end{figure}
+
 \section{Testing Page Layouts}
 
 \lipsum[1-10]

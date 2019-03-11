@@ -49,6 +49,10 @@ Some amazing abstract should come here.
 \chapter{Conclusion}
 \input{src/chap02}
 
+\chapter{Test 3}
+
+\chapter{Test 4}
+
 \appendix
 \chapter{Some Formulas}
 
