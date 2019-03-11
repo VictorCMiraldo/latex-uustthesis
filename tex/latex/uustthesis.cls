@@ -379,19 +379,14 @@ project \@NWOproject{} (\@NWOgrantnumber).
 
 % Draws a seaweed, receives the amound of iterations desired
 \newcommand{\drawseaweed}[1]{
-\resizebox{4cm}{4cm}{%
 \ifPHD@isdrawseaweed
+\resizebox{5cm}{5cm}{%
 \begin{tikzpicture}
-\draw [color=white, rotate=75]
-  [l-system={FractalPlant , axiom=X , order=#1+1 , step=10pt - #1 , angle=23}]
+\draw [color=white, rotate=65]
+  [l-system={FractalPlant , axiom=X , order=#1+1 , step=1pt + #1 , angle=23}]
   lindenmayer system;
-\end{tikzpicture}
-\else
-\begin{tikzpicture}
-\draw [fill,color=black] (0,0) rectangle (2cm , 2cm);
-\end{tikzpicture}
+\end{tikzpicture}}
 \fi
-}
 }
 
 %% Our appendix has to stop the seaweed madness
