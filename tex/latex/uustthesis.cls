@@ -366,7 +366,6 @@ project \@NWOproject{} (\@NWOgrantnumber).
 %%%%%%%%%%%%%%%%%%
 
 %% Latex L-System for drawing seaweeds
-\usetikzlibrary{positioning}
 \usetikzlibrary{lindenmayersystems}
 \pgfdeclarelindenmayersystem{FractalPlant}{
   \rule{X -> F-[[X]+X]+F[+FX]-X}
@@ -378,15 +377,20 @@ project \@NWOproject{} (\@NWOgrantnumber).
 \RequirePackage{calc}
 
 % Draws a seaweed, receives the amound of iterations desired
-\newcommand{\drawseaweed}[1]{
+\newcommand{\drawseaweed}[2]{
+\resizebox{4cm}{4cm}{%
 \ifPHD@isdrawseaweed
-\resizebox{5cm}{5cm}{%
 \begin{tikzpicture}
-\draw [color=white, rotate=65]
-  [l-system={FractalPlant , axiom=X , order=#1+1 , step=1pt + #1 , angle=23}]
+\draw [color=#1, rotate=65 ]
+  [l-system={FractalPlant , axiom=X , order=#2 , step=7pt/#2 , angle=22.5 }]
   lindenmayer system;
-\end{tikzpicture}}
+\end{tikzpicture}
+\else
+\begin{tikzpicture}
+  \draw [color = white] (0,0) rectangle (1,1);
+\end{tikzpicture}
 \fi
+}
 }
 
 %% Our appendix has to stop the seaweed madness
@@ -396,6 +400,8 @@ project \@NWOproject{} (\@NWOgrantnumber).
 \gdef\@chapapp{\appendixname}%
 \gdef\thechapter{\@Alph\c@chapter}%
 \PHD@isdrawseaweedfalse}
+
+\usepackage[strict]{changepage}
 
 \titleformat%
 %Command to change
@@ -407,22 +413,25 @@ project \@NWOproject{} (\@NWOgrantnumber).
 % The chapter label
 % {\Huge\color{gray}\thechapter}%
 {
+\begin{adjustwidth}{}{-5em}
 \begin{flushright}
 \begin{tikzpicture}
-  \draw[fill,color=black] (-1cm , -1cm) rectangle (4cm , 4cm);
-  \draw (1cm , 1cm) node { \drawseaweed{\c@chapter} };
+  \draw (1cm, 1cm) node { \drawseaweed{black}{\c@chapter} };
   \draw node {% 
-    \contourlength{.6mm}
-    \fontsize{105}{130}\selectfont{\contour[64]{black}{%
-       \protect\color{white}\thechapter}}
+    \contourlength{.4mm}
+    \fontsize{105}{130}\selectfont{\contour[64]{white}{%
+       \protect\color{black}\thechapter}}
   };
 \end{tikzpicture}
 \end{flushright}
+\end{adjustwidth}
 }%
 % Separation between label and title body
-{1em}%
+{0em}%
 % Before command
 {\Huge\scshape}%
+
+\titlespacing*{\chapter}{0em}{-2em}{1em}
 
 %%%%%%%%%%%%%%%%%%%%%%
 %% General Packages %%

@@ -1,4 +1,4 @@
-\documentclass[10pt,a4paper,msc]{uustthesis}
+\documentclass[10pt,b5paper]{uustthesis}
 
 \usepackage{lipsum}
 
